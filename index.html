@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashok - Hydrologist & Land Surface Modeler</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --earth-deep: #1a2f23;
+            --earth-mid: #2d4a3a;
+            --water-dark: #1b4d5c;
+            --water-bright: #4a9fb8;
+            --soil-warm: #c7956d;
+            --vegetation: #7fa842;
+            --highlight: #f4e5d3;
+            --text-primary: #e8ebe6;
+            --text-muted: #a8b5ab;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            background: var(--earth-deep);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Animated background pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(75, 159, 184, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(127, 168, 66, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Topographic lines effect */
+        .topo-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            pointer-events: none;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 50px, var(--text-primary) 50px, var(--text-primary) 51px),
+                repeating-linear-gradient(90deg, transparent, transparent 50px, var(--text-primary) 50px, var(--text-primary) 51px);
+            z-index: 0;
+            animation: topoShift 60s linear infinite;
+        }
+
+        @keyframes topoShift {
+            from { transform: translate(0, 0); }
+            to { transform: translate(50px, 50px); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            padding: 6rem 0 4rem;
+            position: relative;
+        }
+
+        .header-content {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        h1 {
+            font-size: 4.5rem;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+            color: var(--highlight);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--water-bright);
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+
+        .tagline {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease-out 0.4s backwards;
+        }
+
+        .data-badge {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--earth-mid);
+            border: 1px solid var(--water-dark);
+            padding: 1.5rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            min-width: 200px;
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+        }
+
+        .data-badge div {
+            margin-bottom: 0.5rem;
+        }
+
+        .data-badge span {
+            color: var(--water-bright);
+            font-weight: 500;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(26, 47, 35, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(75, 159, 184, 0.2);
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--water-bright);
+            transition: width 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--water-bright);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Section styling */
+        section {
+            padding: 5rem 0;
+            border-top: 1px solid rgba(75, 159, 184, 0.1);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 3rem;
+            color: var(--highlight);
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--water-bright), transparent);
+        }
+
+        /* Research areas */
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .research-card {
+            background: var(--earth-mid);
+            border: 1px solid var(--water-dark);
+            padding: 2rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .research-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: linear-gradient(180deg, var(--water-bright), var(--vegetation));
+            transition: height 0.3s;
+        }
+
+        .research-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--water-bright);
+        }
+
+        .research-card:hover::before {
+            height: 100%;
+        }
+
+        .research-card h3 {
+            font-size: 1.5rem;
+            color: var(--water-bright);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .research-card p {
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .research-card .tech-tag {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            background: var(--water-dark);
+            color: var(--water-bright);
+            padding: 0.25rem 0.75rem;
+            border-radius: 3px;
+            margin: 0.5rem 0.5rem 0 0;
+        }
+
+        /* Projects */
+        .project-item {
+            background: var(--earth-mid);
+            border-left: 3px solid var(--water-bright);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 0 4px 4px 0;
+            transition: all 0.3s;
+        }
+
+        .project-item:hover {
+            background: rgba(45, 74, 58, 0.7);
+            border-left-width: 6px;
+        }
+
+        .project-item h3 {
+            font-size: 1.75rem;
+            color: var(--highlight);
+            margin-bottom: 0.75rem;
+        }
+
+        .project-item .project-meta {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--vegetation);
+            margin-bottom: 1rem;
+        }
+
+        .project-item p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .project-item ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .project-item li {
+            color: var(--text-muted);
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-item li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--water-bright);
+        }
+
+        /* Skills */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category h3 {
+            font-size: 1.25rem;
+            color: var(--soil-warm);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 0.5rem 0;
+            color: var(--text-muted);
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .skill-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--vegetation);
+        }
+
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--earth-mid);
+            border-radius: 4px;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .contact-item:hover {
+            border-color: var(--water-bright);
+            transform: translateX(4px);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--water-bright);
+        }
+
+        .contact-item a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-item:hover a {
+            color: var(--water-bright);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            border-top: 1px solid rgba(75, 159, 184, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            .header-content {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .research-grid,
+            .skills-container,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--water-bright), var(--vegetation));
+            z-index: 1000;
+            transition: width 0.1s;
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+    <div class="topo-lines"></div>
+
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div>
+                    <h1>Ashok</h1>
+                    <div class="subtitle">Hydrologist & Land Surface Modeler</div>
+                    <p class="tagline">
+                        Optimizing land surface models for water resource management, 
+                        drought monitoring, and agricultural applications across South Asia.
+                    </p>
+                </div>
+                <div class="data-badge">
+                    <div><span>Model:</span> Noah-MP</div>
+                    <div><span>Domain:</span> Applied Hydrology</div>
+                    <div><span>Focus:</span> Soil Moisture</div>
+                    <div><span>Region:</span> Nepal</div>
+                </div>
+            </div>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <section id="research">
+            <h2>Research Areas</h2>
+            <div class="research-grid">
+                <div class="research-card">
+                    <h3>Land Surface Modeling</h3>
+                    <p>
+                        Optimization of Noah-MP land surface model with updated soil texture 
+                        classifications for improved soil moisture estimation and hydrological forecasting.
+                    </p>
+                    <span class="tech-tag">Noah-MP</span>
+                    <span class="tech-tag">ERA5</span>
+                    <span class="tech-tag">Python</span>
+                </div>
+
+                <div class="research-card">
+                    <h3>Drought Monitoring</h3>
+                    <p>
+                        Development of comprehensive drought monitoring frameworks incorporating 
+                        SPEI, SMAI, soil moisture deficit indices, and recovery period analysis.
+                    </p>
+                    <span class="tech-tag">SPEI</span>
+                    <span class="tech-tag">SMAI</span>
+                    <span class="tech-tag">Skewed Normal Distribution</span>
+                </div>
+
+                <div class="research-card">
+                    <h3>Agricultural Applications</h3>
+                    <p>
+                        Irrigation scheduling optimization and land suitability analysis for 
+                        economic crops, with special focus on rice cultivation systems.
+                    </p>
+                    <span class="tech-tag">Irrigation</span>
+                    <span class="tech-tag">Crop Modeling</span>
+                    <span class="tech-tag">GIS</span>
+                </div>
+
+                <div class="research-card">
+                    <h3>Flash Flood Guidance</h3>
+                    <p>
+                        Exploring calculation methodologies for flash flood guidance systems 
+                        using soil moisture data from land surface models.
+                    </p>
+                    <span class="tech-tag">FFG</span>
+                    <span class="tech-tag">Soil Moisture</span>
+                    <span class="tech-tag">Early Warning</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Key Projects</h2>
+            
+            <div class="project-item">
+                <h3>Noah-MP Optimization for Nepal</h3>
+                <div class="project-meta">Thesis Research | Land Surface Modeling</div>
+                <p>
+                    Optimized the Noah-MP land surface model for improved soil moisture estimation 
+                    through updated soil texture classifications and parameter calibration specific 
+                    to Himalayan watersheds.
+                </p>
+                <ul>
+                    <li>Enhanced soil moisture accuracy by updating soil texture database</li>
+                    <li>Integrated ERA5 atmospheric forcing data for model inputs</li>
+                    <li>Validated outputs against ground observations</li>
+                    <li>Applied to agricultural and hydrological forecasting</li>
+                </ul>
+            </div>
+
+            <div class="project-item">
+                <h3>Drought Monitoring Framework</h3>
+                <div class="project-meta">Research Project | Climate Monitoring</div>
+                <p>
+                    Built a comprehensive drought monitoring and early warning system incorporating 
+                    multiple drought indices and recovery period analysis.
+                </p>
+                <ul>
+                    <li>Implemented SPEI and SMAI for meteorological and agricultural drought</li>
+                    <li>Calculated soil moisture deficit relative to field capacity and saturation</li>
+                    <li>Modeled recovery periods using skewed normal distributions</li>
+                    <li>Integrated potential runoff analysis</li>
+                </ul>
+            </div>
+
+            <div class="project-item">
+                <h3>Rice Land Suitability Analysis</h3>
+                <div class="project-meta">Applied Research | Agricultural Planning</div>
+                <p>
+                    Developed methodology for rice suitability classification based on soil moisture 
+                    requirements during on-season and off-season cropping windows.
+                </p>
+                <ul>
+                    <li>Calculated monthly rainfall requirements from soil moisture outputs</li>
+                    <li>Identified optimal cropping windows based on water availability</li>
+                    <li>Created spatial suitability maps for rice cultivation</li>
+                    <li>Informed irrigation infrastructure planning</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Technical Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Modeling & Simulation</h3>
+                    <ul class="skill-list">
+                        <li>Noah-MP Land Surface Model</li>
+                        <li>Hydrological Modeling</li>
+                        <li>Soil Moisture Estimation</li>
+                        <li>Climate Data Analysis</li>
+                        <li>Model Calibration & Validation</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Data & Tools</h3>
+                    <ul class="skill-list">
+                        <li>ERA5 Reanalysis Data</li>
+                        <li>Python (NumPy, Pandas, xarray)</li>
+                        <li>GIS & Spatial Analysis</li>
+                        <li>Statistical Modeling</li>
+                        <li>Time Series Analysis</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Applied Domains</h3>
+                    <ul class="skill-list">
+                        <li>Irrigation Scheduling</li>
+                        <li>Drought Monitoring (SPEI, SMAI)</li>
+                        <li>Land Suitability Analysis</li>
+                        <li>Flash Flood Guidance</li>
+                        <li>Agricultural Water Management</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Research Methods</h3>
+                    <ul class="skill-list">
+                        <li>Skewed Normal Distribution Modeling</li>
+                        <li>Recovery Period Analysis</li>
+                        <li>Field Capacity & Saturation Analysis</li>
+                        <li>Crop Water Requirement Estimation</li>
+                        <li>Climate Change Impact Assessment</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Get in Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div>
+                        <strong>Email</strong><br>
+                        <a href="mailto:your.email@example.com">your.email@example.com</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">💼</div>
+                    <div>
+                        <strong>LinkedIn</strong><br>
+                        <a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">🐙</div>
+                    <div>
+                        <strong>GitHub</strong><br>
+                        <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">🎓</div>
+                    <div>
+                        <strong>Research</strong><br>
+                        <a href="#" target="_blank">ResearchGate / Google Scholar</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Ashok. Built with dedication to understanding Earth's water systems.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll progress indicator
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollIndicator').style.width = scrolled + '%';
+        });
+
+        // Intersection observer for animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and project items
+        document.querySelectorAll('.research-card, .project-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s, transform 0.6s';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
