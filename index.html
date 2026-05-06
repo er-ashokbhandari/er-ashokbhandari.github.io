@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ashok - Hydrologist & Land Surface Modeler</title>
+    <title>Ashok Bhandari - Civil & Water Resources Engineer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --earth-deep: #1a2f23;
-            --earth-mid: #2d4a3a;
-            --water-dark: #1b4d5c;
-            --water-bright: #4a9fb8;
-            --soil-warm: #c7956d;
-            --vegetation: #7fa842;
-            --highlight: #f4e5d3;
-            --text-primary: #e8ebe6;
-            --text-muted: #a8b5ab;
+            --bg-deep: #0a0e14;
+            --bg-mid: #16181d;
+            --bg-card: #1e2128;
+            --accent-primary: #60a5fa;
+            --accent-secondary: #818cf8;
+            --accent-tertiary: #a78bfa;
+            --text-primary: #e5e7eb;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --border-color: #2d3139;
+            --success: #34d399;
+            --warning: #fbbf24;
         }
 
         * {
@@ -27,14 +30,14 @@
         }
 
         body {
-            font-family: 'Crimson Pro', serif;
-            background: var(--earth-deep);
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-deep);
             color: var(--text-primary);
             line-height: 1.7;
             overflow-x: hidden;
         }
 
-        /* Animated background pattern */
+        /* Animated grid background */
         body::before {
             content: '';
             position: fixed;
@@ -42,32 +45,55 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(75, 159, 184, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(127, 168, 66, 0.06) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* Topographic lines effect */
-        .topo-lines {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.03;
-            pointer-events: none;
             background-image: 
-                repeating-linear-gradient(0deg, transparent, transparent 50px, var(--text-primary) 50px, var(--text-primary) 51px),
-                repeating-linear-gradient(90deg, transparent, transparent 50px, var(--text-primary) 50px, var(--text-primary) 51px);
+                linear-gradient(rgba(96, 165, 250, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(96, 165, 250, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
             z-index: 0;
-            animation: topoShift 60s linear infinite;
         }
 
-        @keyframes topoShift {
-            from { transform: translate(0, 0); }
-            to { transform: translate(50px, 50px); }
+        /* Gradient orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--accent-primary);
+            top: -250px;
+            right: -250px;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-secondary);
+            bottom: -200px;
+            left: -200px;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent-tertiary);
+            top: 50%;
+            left: 50%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
         }
 
         .container {
@@ -78,7 +104,7 @@
             z-index: 1;
         }
 
-        /* Header */
+        /* Header with Photo */
         header {
             padding: 6rem 0 4rem;
             position: relative;
@@ -86,55 +112,121 @@
 
         .header-content {
             display: grid;
-            grid-template-columns: 1fr auto;
+            grid-template-columns: auto 1fr auto;
             gap: 3rem;
-            align-items: start;
+            align-items: center;
         }
 
-        h1 {
-            font-size: 4.5rem;
-            font-weight: 300;
-            letter-spacing: -0.02em;
-            margin-bottom: 0.5rem;
-            color: var(--highlight);
+        .profile-photo-container {
+            position: relative;
+        }
+
+        .profile-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-primary);
+            box-shadow: 0 0 30px rgba(96, 165, 250, 0.3);
+            object-fit: cover;
+            background: var(--bg-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--accent-primary);
+        }
+
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .status-badge {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: var(--success);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 3px solid var(--bg-deep);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .header-text {
             animation: fadeInUp 1s ease-out;
         }
 
-        .subtitle {
-            font-size: 1.5rem;
-            color: var(--water-bright);
-            font-weight: 400;
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 1s ease-out 0.2s backwards;
-        }
-
-        .tagline {
-            font-size: 1.125rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            line-height: 1.8;
-            animation: fadeInUp 1s ease-out 0.4s backwards;
-        }
-
-        .data-badge {
-            font-family: 'JetBrains Mono', monospace;
-            background: var(--earth-mid);
-            border: 1px solid var(--water-dark);
-            padding: 1.5rem;
-            border-radius: 4px;
-            font-size: 0.875rem;
-            color: var(--text-muted);
-            min-width: 200px;
-            animation: fadeInUp 1s ease-out 0.6s backwards;
-        }
-
-        .data-badge div {
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
             margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .data-badge span {
-            color: var(--water-bright);
+        .title {
+            font-size: 1.5rem;
+            color: var(--accent-primary);
             font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+        }
+
+        .credentials-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            min-width: 250px;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+        }
+
+        .credential-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.875rem;
+        }
+
+        .credential-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .credential-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .credential-text {
+            color: var(--text-secondary);
+        }
+
+        .credential-value {
+            color: var(--text-primary);
+            font-weight: 600;
         }
 
         @keyframes fadeInUp {
@@ -152,41 +244,45 @@
         nav {
             position: sticky;
             top: 0;
-            background: rgba(26, 47, 35, 0.95);
+            background: rgba(10, 14, 20, 0.9);
             backdrop-filter: blur(10px);
             padding: 1rem 0;
-            border-bottom: 1px solid rgba(75, 159, 184, 0.2);
+            border-bottom: 1px solid var(--border-color);
             z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
         }
 
         nav ul {
             list-style: none;
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         nav a {
-            color: var(--text-muted);
+            color: var(--text-secondary);
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 0.95rem;
+            font-weight: 500;
             transition: color 0.3s;
             position: relative;
+            padding: 0.5rem 0;
         }
 
         nav a::after {
             content: '';
             position: absolute;
-            bottom: -4px;
+            bottom: 0;
             left: 0;
             width: 0;
-            height: 1px;
-            background: var(--water-bright);
+            height: 2px;
+            background: var(--accent-primary);
             transition: width 0.3s;
         }
 
         nav a:hover {
-            color: var(--water-bright);
+            color: var(--accent-primary);
         }
 
         nav a:hover::after {
@@ -196,16 +292,19 @@
         /* Section styling */
         section {
             padding: 5rem 0;
-            border-top: 1px solid rgba(75, 159, 184, 0.1);
+            border-top: 1px solid var(--border-color);
         }
 
         h2 {
             font-size: 2.5rem;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 3rem;
-            color: var(--highlight);
             position: relative;
             display: inline-block;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         h2::after {
@@ -213,192 +312,510 @@
             position: absolute;
             bottom: -8px;
             left: 0;
-            width: 60px;
-            height: 2px;
-            background: linear-gradient(90deg, var(--water-bright), transparent);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 2px;
         }
 
-        /* Research areas */
-        .research-grid {
+        /* Stats Section */
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
-            margin-top: 2rem;
+            margin-bottom: 3rem;
         }
 
-        .research-card {
-            background: var(--earth-mid);
-            border: 1px solid var(--water-dark);
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
             padding: 2rem;
-            border-radius: 4px;
+            text-align: center;
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
         }
 
-        .research-card::before {
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 8px 24px rgba(96, 165, 250, 0.15);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Academic Section */
+        .academic-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .academic-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .academic-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 4px;
             height: 0;
-            background: linear-gradient(180deg, var(--water-bright), var(--vegetation));
+            background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
             transition: height 0.3s;
         }
 
-        .research-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--water-bright);
-        }
-
-        .research-card:hover::before {
+        .academic-card:hover::before {
             height: 100%;
         }
 
-        .research-card h3 {
+        .academic-card:hover {
+            transform: translateX(8px);
+            border-color: var(--accent-primary);
+        }
+
+        .academic-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1.5rem;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .academic-title {
+            flex: 1;
+        }
+
+        .academic-title h3 {
+            font-size: 1.75rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .academic-institution {
+            color: var(--accent-primary);
+            font-size: 1.125rem;
+            font-weight: 500;
+        }
+
+        .academic-badges {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .academic-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .detail-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(96, 165, 250, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-primary);
+            font-size: 1.125rem;
+        }
+
+        .detail-content span {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .detail-content strong {
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .academic-majors {
+            margin-top: 1rem;
+        }
+
+        .academic-majors h4 {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .majors-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .major-tag {
+            background: var(--bg-mid);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 12px 32px rgba(96, 165, 250, 0.2);
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
             font-size: 1.5rem;
-            color: var(--water-bright);
+            color: var(--text-primary);
             margin-bottom: 1rem;
             font-weight: 600;
         }
 
-        .research-card p {
-            color: var(--text-muted);
+        .service-card p {
+            color: var(--text-secondary);
             line-height: 1.7;
+            margin-bottom: 1.5rem;
         }
 
-        .research-card .tech-tag {
-            display: inline-block;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            background: var(--water-dark);
-            color: var(--water-bright);
-            padding: 0.25rem 0.75rem;
-            border-radius: 3px;
-            margin: 0.5rem 0.5rem 0 0;
-        }
-
-        /* Projects */
-        .project-item {
-            background: var(--earth-mid);
-            border-left: 3px solid var(--water-bright);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border-radius: 0 4px 4px 0;
-            transition: all 0.3s;
-        }
-
-        .project-item:hover {
-            background: rgba(45, 74, 58, 0.7);
-            border-left-width: 6px;
-        }
-
-        .project-item h3 {
-            font-size: 1.75rem;
-            color: var(--highlight);
-            margin-bottom: 0.75rem;
-        }
-
-        .project-item .project-meta {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.875rem;
-            color: var(--vegetation);
-            margin-bottom: 1rem;
-        }
-
-        .project-item p {
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-        }
-
-        .project-item ul {
+        .service-features {
             list-style: none;
-            padding-left: 0;
         }
 
-        .project-item li {
-            color: var(--text-muted);
+        .service-features li {
+            color: var(--text-secondary);
+            padding: 0.5rem 0;
             padding-left: 1.5rem;
             position: relative;
-            margin-bottom: 0.5rem;
         }
 
-        .project-item li::before {
+        .service-features li::before {
             content: '→';
             position: absolute;
             left: 0;
-            color: var(--water-bright);
+            color: var(--accent-primary);
+            font-weight: 600;
         }
 
-        /* Skills */
-        .skills-container {
+        /* Projects with Downloads */
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent-primary);
+            box-shadow: 0 8px 24px rgba(96, 165, 250, 0.15);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1.5rem;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .project-title h3 {
+            font-size: 1.75rem;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .project-meta {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--accent-primary);
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .project-tag {
+            background: rgba(96, 165, 250, 0.1);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(96, 165, 250, 0.4);
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-highlights {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .highlight-item {
+            background: var(--bg-mid);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-primary);
+        }
+
+        .highlight-item strong {
+            color: var(--accent-primary);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .skill-category:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-4px);
         }
 
         .skill-category h3 {
             font-size: 1.25rem;
-            color: var(--soil-warm);
-            margin-bottom: 1rem;
+            color: var(--accent-primary);
+            margin-bottom: 1.5rem;
             font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .skill-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(96, 165, 250, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .skill-list {
             list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
         }
 
-        .skill-list li {
+        .skill-item {
+            color: var(--text-secondary);
             padding: 0.5rem 0;
-            color: var(--text-muted);
+            padding-left: 1.5rem;
             position: relative;
-            padding-left: 1rem;
+            transition: all 0.3s;
         }
 
-        .skill-list li::before {
-            content: '•';
+        .skill-item::before {
+            content: '▸';
             position: absolute;
             left: 0;
-            color: var(--vegetation);
+            color: var(--accent-primary);
+            font-weight: 600;
         }
 
-        /* Contact */
+        .skill-item:hover {
+            color: var(--text-primary);
+            padding-left: 2rem;
+        }
+
+        /* Contact Section */
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
         }
 
-        .contact-item {
+        .contact-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
             display: flex;
             align-items: center;
-            gap: 1rem;
-            padding: 1.5rem;
-            background: var(--earth-mid);
-            border-radius: 4px;
+            gap: 1.5rem;
             transition: all 0.3s;
-            border: 1px solid transparent;
         }
 
-        .contact-item:hover {
-            border-color: var(--water-bright);
-            transform: translateX(4px);
+        .contact-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateX(8px);
+            box-shadow: 0 4px 16px rgba(96, 165, 250, 0.15);
         }
 
         .contact-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1.5rem;
-            color: var(--water-bright);
+            flex-shrink: 0;
         }
 
-        .contact-item a {
+        .contact-info strong {
+            display: block;
             color: var(--text-primary);
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+        }
+
+        .contact-info a {
+            color: var(--accent-primary);
             text-decoration: none;
             transition: color 0.3s;
         }
 
-        .contact-item:hover a {
-            color: var(--water-bright);
+        .contact-info a:hover {
+            color: var(--accent-secondary);
         }
 
         /* Footer */
@@ -406,30 +823,7 @@
             padding: 3rem 0;
             text-align: center;
             color: var(--text-muted);
-            font-size: 0.875rem;
-            border-top: 1px solid rgba(75, 159, 184, 0.1);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 3rem;
-            }
-
-            .header-content {
-                grid-template-columns: 1fr;
-            }
-
-            nav ul {
-                flex-wrap: wrap;
-                gap: 1rem;
-            }
-
-            .research-grid,
-            .skills-container,
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
+            border-top: 1px solid var(--border-color);
         }
 
         /* Scroll indicator */
@@ -438,188 +832,641 @@
             top: 0;
             left: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--water-bright), var(--vegetation));
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
             z-index: 1000;
             transition: width 0.1s;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .header-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .profile-photo {
+                margin: 0 auto;
+            }
+
+            nav ul {
+                gap: 1.5rem;
+            }
+
+            .services-grid,
+            .skills-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <div class="scroll-indicator" id="scrollIndicator"></div>
-    <div class="topo-lines"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
 
     <div class="container">
         <header>
             <div class="header-content">
-                <div>
-                    <h1>Ashok</h1>
-                    <div class="subtitle">Hydrologist & Land Surface Modeler</div>
-                    <p class="tagline">
-                        Optimizing land surface models for water resource management, 
-                        drought monitoring, and agricultural applications across South Asia.
+                <div class="profile-photo-container">
+                    <div class="profile-photo">
+                        <!-- Replace the line below with: <img src="your-photo.jpg" alt="Ashok Bhandari"> -->
+                        👤
+                    </div>
+                    <div class="status-badge"></div>
+                </div>
+                
+                <div class="header-text">
+                    <h1>Ashok Bhandari</h1>
+                    <div class="title">Civil & Water Resources Engineer | Hydrologist</div>
+                    <p class="subtitle">
+                        ADB-JSP Scholar with 6+ years of experience in climate-resilient infrastructure planning, 
+                        hydrological modeling, and sustainable urban development across Nepal and Southeast Asia.
                     </p>
                 </div>
-                <div class="data-badge">
-                    <div><span>Model:</span> Noah-MP</div>
-                    <div><span>Domain:</span> Applied Hydrology</div>
-                    <div><span>Focus:</span> Soil Moisture</div>
-                    <div><span>Region:</span> Nepal</div>
+
+                <div class="credentials-box">
+                    <div class="credential-item">
+                        <div class="credential-icon">🎓</div>
+                        <div>
+                            <div class="credential-text">Education</div>
+                            <div class="credential-value">M.Sc. WEM (AIT)</div>
+                        </div>
+                    </div>
+                    <div class="credential-item">
+                        <div class="credential-icon">🏆</div>
+                        <div>
+                            <div class="credential-text">Awards</div>
+                            <div class="credential-value">Gold Medalist</div>
+                        </div>
+                    </div>
+                    <div class="credential-item">
+                        <div class="credential-icon">📍</div>
+                        <div>
+                            <div class="credential-text">Location</div>
+                            <div class="credential-value">Kathmandu, Nepal</div>
+                        </div>
+                    </div>
+                    <div class="credential-item">
+                        <div class="credential-icon">💼</div>
+                        <div>
+                            <div class="credential-text">Experience</div>
+                            <div class="credential-value">6+ Years</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </header>
 
         <nav>
             <ul>
-                <li><a href="#research">Research</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#services">Consultancy</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
 
-        <section id="research">
-            <h2>Research Areas</h2>
-            <div class="research-grid">
-                <div class="research-card">
-                    <h3>Land Surface Modeling</h3>
-                    <p>
-                        Optimization of Noah-MP land surface model with updated soil texture 
-                        classifications for improved soil moisture estimation and hydrological forecasting.
-                    </p>
-                    <span class="tech-tag">Noah-MP</span>
-                    <span class="tech-tag">ERA5</span>
-                    <span class="tech-tag">Python</span>
+        <section id="about">
+            <h2>Professional Summary</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">6+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24+</div>
+                    <div class="stat-label">Tourism Destinations</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">14</div>
+                    <div class="stat-label">Municipalities Served</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">River Basin Studies</div>
+                </div>
+            </div>
+            <p style="color: var(--text-secondary); font-size: 1.125rem; line-height: 1.8; max-width: 900px;">
+                Civil and Water Resources Engineer specializing in climate-resilient infrastructure development, 
+                hydrological modeling, and sustainable urban planning. Proven track record in supporting municipalities 
+                and government agencies across Nepal in preparing integrated urban development plans, feasibility studies, 
+                and investment-ready infrastructure projects. Experienced in multi-hazard risk assessments, environmental 
+                safeguards, and community-based development in challenging terrains including high-altitude Himalayan regions.
+            </p>
+        </section>
+
+        <section id="education">
+            <h2>Academic Excellence</h2>
+            <div class="academic-grid">
+                <div class="academic-card">
+                    <div class="academic-header">
+                        <div class="academic-title">
+                            <h3>Master of Science in Water Engineering and Management</h3>
+                            <div class="academic-institution">Asian Institute of Technology (AIT), Thailand</div>
+                        </div>
+                        <div class="academic-badges">
+                            <span class="badge">🏆 Outstanding Graduate</span>
+                            <span class="badge">💰 ADB-JSP Scholar</span>
+                        </div>
+                    </div>
+                    
+                    <div class="academic-details">
+                        <div class="detail-item">
+                            <div class="detail-icon">📅</div>
+                            <div class="detail-content">
+                                <span>Duration</span>
+                                <strong>Aug 2023 - May 2025</strong>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">📊</div>
+                            <div class="detail-content">
+                                <span>CGPA</span>
+                                <strong>3.78 / 4.0</strong>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">📝</div>
+                            <div class="detail-content">
+                                <span>Thesis</span>
+                                <strong>Noah-MP Optimization</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="academic-majors">
+                        <h4>Core Specializations:</h4>
+                        <div class="majors-list">
+                            <span class="major-tag">Hydrology</span>
+                            <span class="major-tag">Water Resource Modeling</span>
+                            <span class="major-tag">Google Earth Engine</span>
+                            <span class="major-tag">Environmental Impact Assessment</span>
+                            <span class="major-tag">GIS for Water Resources</span>
+                            <span class="major-tag">Satellite Remote Sensing</span>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="research-card">
-                    <h3>Drought Monitoring</h3>
+                <div class="academic-card">
+                    <div class="academic-header">
+                        <div class="academic-title">
+                            <h3>Bachelor of Technology in Civil Engineering</h3>
+                            <div class="academic-institution">University of Kerala, India</div>
+                        </div>
+                        <div class="academic-badges">
+                            <span class="badge">🥇 Gold Medal</span>
+                            <span class="badge">🎓 Indian Embassy Scholar</span>
+                        </div>
+                    </div>
+                    
+                    <div class="academic-details">
+                        <div class="detail-item">
+                            <div class="detail-icon">📅</div>
+                            <div class="detail-content">
+                                <span>Duration</span>
+                                <strong>Aug 2013 - Jun 2017</strong>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">📊</div>
+                            <div class="detail-content">
+                                <span>Percentage</span>
+                                <strong>90.2%</strong>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">🏅</div>
+                            <div class="detail-content">
+                                <span>Recognition</span>
+                                <strong>University Topper</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="academic-majors">
+                        <h4>Core Specializations:</h4>
+                        <div class="majors-list">
+                            <span class="major-tag">Structural Analysis & Design</span>
+                            <span class="major-tag">CADD</span>
+                            <span class="major-tag">Estimation & Costing</span>
+                            <span class="major-tag">Geotechnical Engineering</span>
+                            <span class="major-tag">Hydrodynamics</span>
+                            <span class="major-tag">Water Resources Engineering</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="academic-grid" style="margin-top: 2rem;">
+                <div class="academic-card">
+                    <h3 style="color: var(--accent-primary); margin-bottom: 1.5rem;">🎖️ Professional Certifications</h3>
+                    <div class="majors-list">
+                        <span class="major-tag">✓ Registered Engineer - Nepal Engineering Council (NEC) - No. 17884 "Civil" "A"</span>
+                        <span class="major-tag">✓ Life Member - Nepal Engineers Association (NEA) - No. 29423</span>
+                    </div>
+                </div>
+                
+                <div class="academic-card">
+                    <h3 style="color: var(--accent-primary); margin-bottom: 1.5rem;">🌱 Recent Training & Workshops</h3>
+                    <div class="service-features">
+                        <li>Nature-based Solutions for Disaster & Climate Resilience (SDGAcademyX, 2025)</li>
+                        <li>Earthquake Disaster Study - Thailand-Myanmar (AIT-SU, 2025)</li>
+                        <li>NASA-ADPC Workshop on Satellite Soil Moisture Retrieval (AIT, 2024)</li>
+                        <li>Lancang-Mekong River Water Sciences Training (Hohai University, 2024)</li>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services">
+            <h2>Consultancy Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🌊</div>
+                    <h3>Land Surface Model Optimization</h3>
                     <p>
-                        Development of comprehensive drought monitoring frameworks incorporating 
-                        SPEI, SMAI, soil moisture deficit indices, and recovery period analysis.
+                        Expert consultancy in optimizing and calibrating land surface models (Noah-MP, CLM, VIC) 
+                        for regional applications with soil texture classification and parameter calibration.
                     </p>
-                    <span class="tech-tag">SPEI</span>
-                    <span class="tech-tag">SMAI</span>
-                    <span class="tech-tag">Skewed Normal Distribution</span>
+                    <ul class="service-features">
+                        <li>Model setup for specific watersheds</li>
+                        <li>ERA5, MERRA-2 forcing data integration</li>
+                        <li>Soil parameter optimization</li>
+                        <li>Performance evaluation & uncertainty analysis</li>
+                    </ul>
                 </div>
 
-                <div class="research-card">
-                    <h3>Agricultural Applications</h3>
+                <div class="service-card">
+                    <div class="service-icon">🌡️</div>
+                    <h3>Drought Monitoring & Early Warning</h3>
                     <p>
-                        Irrigation scheduling optimization and land suitability analysis for 
-                        economic crops, with special focus on rice cultivation systems.
+                        Comprehensive drought monitoring frameworks combining SPEI, SMAI, SPI with soil moisture 
+                        deficit analysis for agricultural and water resource management.
                     </p>
-                    <span class="tech-tag">Irrigation</span>
-                    <span class="tech-tag">Crop Modeling</span>
-                    <span class="tech-tag">GIS</span>
+                    <ul class="service-features">
+                        <li>Multi-index drought monitoring systems</li>
+                        <li>Agricultural drought risk mapping</li>
+                        <li>Recovery period statistical modeling</li>
+                        <li>Climate forecast integration</li>
+                    </ul>
                 </div>
 
-                <div class="research-card">
+                <div class="service-card">
+                    <div class="service-icon">💧</div>
+                    <h3>Irrigation Scheduling & Water Management</h3>
+                    <p>
+                        Soil moisture-based irrigation scheduling for optimizing water use efficiency, 
+                        combining LSM outputs with crop water requirements.
+                    </p>
+                    <ul class="service-features">
+                        <li>Real-time soil moisture monitoring</li>
+                        <li>Crop-specific irrigation optimization</li>
+                        <li>Field capacity analysis</li>
+                        <li>Mobile/web decision support tools</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🌾</div>
+                    <h3>Land Suitability Analysis</h3>
+                    <p>
+                        Comprehensive land suitability assessments for economic crops using integrated 
+                        soil moisture, rainfall, and crop water requirement analysis.
+                    </p>
+                    <ul class="service-features">
+                        <li>Multi-criteria suitability mapping</li>
+                        <li>Optimal cropping window determination</li>
+                        <li>Climate change impact assessment</li>
+                        <li>Irrigation infrastructure planning</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">⚠️</div>
                     <h3>Flash Flood Guidance</h3>
                     <p>
-                        Exploring calculation methodologies for flash flood guidance systems 
-                        using soil moisture data from land surface models.
+                        Development of flash flood guidance systems using soil moisture accounting and 
+                        rainfall threshold analysis for disaster preparedness.
                     </p>
-                    <span class="tech-tag">FFG</span>
-                    <span class="tech-tag">Soil Moisture</span>
-                    <span class="tech-tag">Early Warning</span>
+                    <ul class="service-features">
+                        <li>Soil moisture-based flood thresholds</li>
+                        <li>Real-time flood risk assessment</li>
+                        <li>Meteorological forecast integration</li>
+                        <li>Community-based early warning systems</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🏙️</div>
+                    <h3>Urban Infrastructure Planning</h3>
+                    <p>
+                        Integrated urban water and infrastructure planning including drainage systems, 
+                        sewerage networks, and climate-resilient design.
+                    </p>
+                    <ul class="service-features">
+                        <li>Urban stormwater drainage design</li>
+                        <li>River training & flood management</li>
+                        <li>Feasibility studies & DPRs</li>
+                        <li>Multi-sectoral investment planning</li>
+                    </ul>
                 </div>
             </div>
         </section>
 
         <section id="projects">
-            <h2>Key Projects</h2>
+            <h2>Featured Projects</h2>
             
-            <div class="project-item">
-                <h3>Noah-MP Optimization for Nepal</h3>
-                <div class="project-meta">Thesis Research | Land Surface Modeling</div>
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-title">
+                        <h3>Noah-MP Optimization for Improved Soil Moisture Estimation</h3>
+                        <div class="project-meta">
+                            <span class="project-tag">Master's Thesis</span>
+                            <span class="project-tag">Land Surface Modeling</span>
+                            <span class="project-tag">2023-2025</span>
+                        </div>
+                    </div>
+                    <a href="#" class="download-btn" onclick="alert('Add your project document link here'); return false;">
+                        📄 Download Report
+                    </a>
+                </div>
                 <p>
-                    Optimized the Noah-MP land surface model for improved soil moisture estimation 
-                    through updated soil texture classifications and parameter calibration specific 
-                    to Himalayan watersheds.
+                    Optimized the Noah-MP land surface model for enhanced soil moisture estimation through 
+                    updated soil texture classifications and parameter calibration specific to Himalayan watersheds.
                 </p>
-                <ul>
-                    <li>Enhanced soil moisture accuracy by updating soil texture database</li>
-                    <li>Integrated ERA5 atmospheric forcing data for model inputs</li>
-                    <li>Validated outputs against ground observations</li>
-                    <li>Applied to agricultural and hydrological forecasting</li>
-                </ul>
+                <div class="project-highlights">
+                    <div class="highlight-item">
+                        <strong>Model Enhancement</strong>
+                        Updated soil texture database for Nepal
+                    </div>
+                    <div class="highlight-item">
+                        <strong>Data Integration</strong>
+                        ERA5 atmospheric forcing data
+                    </div>
+                    <div class="highlight-item">
+                        <strong>Validation</strong>
+                        Ground observation comparison
+                    </div>
+                    <div class="highlight-item">
+                        <strong>Applications</strong>
+                        Agricultural & hydrological forecasting
+                    </div>
+                </div>
             </div>
 
-            <div class="project-item">
-                <h3>Drought Monitoring Framework</h3>
-                <div class="project-meta">Research Project | Climate Monitoring</div>
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-title">
+                        <h3>Greater Gauri Shankar Himalayan Tourism Development</h3>
+                        <div class="project-meta">
+                            <span class="project-tag">Government of Nepal</span>
+                            <span class="project-tag">24 Destinations</span>
+                            <span class="project-tag">NPR 10-30 Crores/Site</span>
+                        </div>
+                    </div>
+                    <a href="#" class="download-btn" onclick="alert('Add your project portfolio link here'); return false;">
+                        📦 View Portfolio
+                    </a>
+                </div>
                 <p>
-                    Built a comprehensive drought monitoring and early warning system incorporating 
-                    multiple drought indices and recovery period analysis.
+                    Led feasibility assessments for 24 Himalayan tourism destinations, resulting in selection and 
+                    approval of 10 priority sites for detailed master planning including Sangen Valley, Langtang, 
+                    Tsho-Rolpa, Rolwaling Valley, and Makalu Barun.
                 </p>
-                <ul>
-                    <li>Implemented SPEI and SMAI for meteorological and agricultural drought</li>
-                    <li>Calculated soil moisture deficit relative to field capacity and saturation</li>
-                    <li>Modeled recovery periods using skewed normal distributions</li>
-                    <li>Integrated potential runoff analysis</li>
-                </ul>
+                <div class="project-highlights">
+                    <div class="highlight-item">
+                        <strong>Scope</strong>
+                        Master Plans & DPRs for 10 destinations
+                    </div>
+                    <div class="highlight-item">
+                        <strong>Investment</strong>
+                        NPR 10-30 crores per site
+                    </div>
+                    <div class="highlight-item">
+                        <strong>Deliverables</strong>
+                        Eco-tourism infrastructure design
+                    </div>
+                    <div class="highlight-item">
+                        <strong>Focus Areas</strong>
+                        Multi-hazard assessment & climate resilience
+                    </div>
+                </div>
             </div>
 
-            <div class="project-item">
-                <h3>Rice Land Suitability Analysis</h3>
-                <div class="project-meta">Applied Research | Agricultural Planning</div>
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-title">
+                        <h3>30 km Gauri Shankar Trekking Route Development</h3>
+                        <div class="project-meta">
+                            <span class="project-tag">Department of Tourism</span>
+                            <span class="project-tag">DPR & Feasibility</span>
+                            <span class="project-tag">High-Altitude</span>
+                        </div>
+                    </div>
+                    <a href="#" class="download-btn" onclick="alert('Add your DPR document link here'); return false;">
+                        📄 Download DPR
+                    </a>
+                </div>
                 <p>
-                    Developed methodology for rice suitability classification based on soil moisture 
-                    requirements during on-season and off-season cropping windows.
+                    Comprehensive feasibility study and DPR for a new 30 km trekking route including 
+                    settlement-level tourism development in Beding and surrounding villages.
                 </p>
-                <ul>
-                    <li>Calculated monthly rainfall requirements from soil moisture outputs</li>
-                    <li>Identified optimal cropping windows based on water availability</li>
-                    <li>Created spatial suitability maps for rice cultivation</li>
-                    <li>Informed irrigation infrastructure planning</li>
-                </ul>
+                <div class="project-highlights">
+                    <div class="highlight-item">
+                        <strong>Route Planning</strong>
+                        30 km climate-resilient trail
+                    </div>
+                    <div class="highlight-item">
+                        <strong>Risk Assessment</strong>
+                        Flash flood & landslide analysis
+                    </div>
+                    <div class="highlight-item">
+                        <strong>Hazard Mapping</strong>
+                        Zonation & safe route alignment
+                    </div>
+                    <div class="highlight-item">
+                        <strong>Community Development</strong>
+                        Settlement-level infrastructure
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-title">
+                        <h3>Integrated Urban Development Planning - 14 Municipalities</h3>
+                        <div class="project-meta">
+                            <span class="project-tag">DUDBC</span>
+                            <span class="project-tag">Urban Planning</span>
+                            <span class="project-tag">NPR 300M+ per project</span>
+                        </div>
+                    </div>
+                    <a href="#" class="download-btn" onclick="alert('Add your urban planning documents link here'); return false;">
+                        📊 Project Summary
+                    </a>
+                </div>
+                <p>
+                    Led integrated urban water and infrastructure planning for 14 municipalities, including 
+                    15-year development visions, sector strategies, and Detailed Engineering Designs for 
+                    priority infrastructure projects.
+                </p>
+                <div class="project-highlights">
+                    <div class="highlight-item">
+                        <strong>Infrastructure</strong>
+                        Drainage, sewerage, water supply
+                    </div>
+                    <div class="highlight-item">
+                        <strong>Investment</strong>
+                        NPR 300M+ per priority project
+                    </div>
+                    <div class="highlight-item">
+                        <strong>Planning Horizon</strong>
+                        15-year development vision
+                    </div>
+                    <div class="highlight-item">
+                        <strong>Approach</strong>
+                        Climate-resilient & flood-aware design
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-title">
+                        <h3>Watershed & River Basin Assessments - 10+ Basins</h3>
+                        <div class="project-meta">
+                            <span class="project-tag">Research</span>
+                            <span class="project-tag">Hydrological Analysis</span>
+                            <span class="project-tag">Nepal-wide</span>
+                        </div>
+                    </div>
+                    <a href="#" class="download-btn" onclick="alert('Add your research reports link here'); return false;">
+                        📑 Research Reports
+                    </a>
+                </div>
+                <p>
+                    Conducted comprehensive hydrological and watershed assessments across more than 10 major 
+                    river basins in Nepal including Birendranagar, Gandaki Province, and Upper Karnali.
+                </p>
+                <div class="project-highlights">
+                    <div class="highlight-item">
+                        <strong>Coverage</strong>
+                        10+ major river basins
+                    </div>
+                    <div class="highlight-item">
+                        <strong>Methods</strong>
+                        Runoff modeling & flood analysis
+                    </div>
+                    <div class="highlight-item">
+                        <strong>Applications</strong>
+                        Groundwater recharge assessment
+                    </div>
+                    <div class="highlight-item">
+                        <strong>Collaboration</strong>
+                        FAO Churia restoration plans
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="skills">
-            <h2>Technical Skills</h2>
-            <div class="skills-container">
+            <h2>Technical Expertise</h2>
+            <div class="skills-grid">
                 <div class="skill-category">
-                    <h3>Modeling & Simulation</h3>
+                    <h3>
+                        <span class="skill-icon">🌊</span>
+                        Hydrological Modeling
+                    </h3>
                     <ul class="skill-list">
-                        <li>Noah-MP Land Surface Model</li>
-                        <li>Hydrological Modeling</li>
-                        <li>Soil Moisture Estimation</li>
-                        <li>Climate Data Analysis</li>
-                        <li>Model Calibration & Validation</li>
+                        <li class="skill-item">Noah-MP Land Surface Model</li>
+                        <li class="skill-item">HEC-HMS & HEC-RAS</li>
+                        <li class="skill-item">MIKE+ Urban & River Modeling</li>
+                        <li class="skill-item">SWAT Watershed Model</li>
+                        <li class="skill-item">Soil Moisture Estimation</li>
+                        <li class="skill-item">Flood & Drought Analysis</li>
                     </ul>
                 </div>
 
                 <div class="skill-category">
-                    <h3>Data & Tools</h3>
+                    <h3>
+                        <span class="skill-icon">🗺️</span>
+                        Geospatial Analysis
+                    </h3>
                     <ul class="skill-list">
-                        <li>ERA5 Reanalysis Data</li>
-                        <li>Python (NumPy, Pandas, xarray)</li>
-                        <li>GIS & Spatial Analysis</li>
-                        <li>Statistical Modeling</li>
-                        <li>Time Series Analysis</li>
+                        <li class="skill-item">QGIS & ArcGIS</li>
+                        <li class="skill-item">Google Earth Engine</li>
+                        <li class="skill-item">Remote Sensing & Satellite Data</li>
+                        <li class="skill-item">Civil 3D & AutoCAD</li>
+                        <li class="skill-item">Spatial Data Analysis</li>
+                        <li class="skill-item">DEM & Terrain Analysis</li>
                     </ul>
                 </div>
 
                 <div class="skill-category">
-                    <h3>Applied Domains</h3>
+                    <h3>
+                        <span class="skill-icon">📊</span>
+                        Data Science & Programming
+                    </h3>
                     <ul class="skill-list">
-                        <li>Irrigation Scheduling</li>
-                        <li>Drought Monitoring (SPEI, SMAI)</li>
-                        <li>Land Suitability Analysis</li>
-                        <li>Flash Flood Guidance</li>
-                        <li>Agricultural Water Management</li>
+                        <li class="skill-item">Python (NumPy, Pandas, xarray)</li>
+                        <li class="skill-item">Data Analysis & Visualization</li>
+                        <li class="skill-item">Statistical Modeling</li>
+                        <li class="skill-item">Time Series Analysis</li>
+                        <li class="skill-item">Climate Data Processing</li>
+                        <li class="skill-item">ERA5 & CMIP6 Data</li>
                     </ul>
                 </div>
 
                 <div class="skill-category">
-                    <h3>Research Methods</h3>
+                    <h3>
+                        <span class="skill-icon">🏗️</span>
+                        Infrastructure Design
+                    </h3>
                     <ul class="skill-list">
-                        <li>Skewed Normal Distribution Modeling</li>
-                        <li>Recovery Period Analysis</li>
-                        <li>Field Capacity & Saturation Analysis</li>
-                        <li>Crop Water Requirement Estimation</li>
-                        <li>Climate Change Impact Assessment</li>
+                        <li class="skill-item">Urban Drainage Systems</li>
+                        <li class="skill-item">Water Supply & Sewerage</li>
+                        <li class="skill-item">Structural Design (SAP, ETABS)</li>
+                        <li class="skill-item">River Training Works</li>
+                        <li class="skill-item">DPR & Feasibility Studies</li>
+                        <li class="skill-item">Cost Estimation & BOQs</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>
+                        <span class="skill-icon">🌍</span>
+                        Climate & Environment
+                    </h3>
+                    <ul class="skill-list">
+                        <li class="skill-item">Climate Change Impact Assessment</li>
+                        <li class="skill-item">Environmental Impact Assessment</li>
+                        <li class="skill-item">Multi-Hazard Risk Assessment</li>
+                        <li class="skill-item">Disaster Risk Reduction</li>
+                        <li class="skill-item">Climate-Resilient Design</li>
+                        <li class="skill-item">Environmental Safeguards (ESMP)</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>
+                        <span class="skill-icon">💼</span>
+                        Project Management
+                    </h3>
+                    <ul class="skill-list">
+                        <li class="skill-item">Feasibility Studies & DPRs</li>
+                        <li class="skill-item">Stakeholder Engagement</li>
+                        <li class="skill-item">Multi-Sectoral Coordination</li>
+                        <li class="skill-item">Technical Documentation</li>
+                        <li class="skill-item">Procurement & Bid Documents</li>
+                        <li class="skill-item">GESI Integration</li>
                     </ul>
                 </div>
             </div>
@@ -628,35 +1475,51 @@
         <section id="contact">
             <h2>Get in Touch</h2>
             <div class="contact-grid">
-                <div class="contact-item">
+                <div class="contact-card">
                     <div class="contact-icon">📧</div>
-                    <div>
-                        <strong>Email</strong><br>
-                        <a href="mailto:your.email@example.com">your.email@example.com</a>
+                    <div class="contact-info">
+                        <strong>Email</strong>
+                        <a href="mailto:er.ashokbhandari@gmail.com">er.ashokbhandari@gmail.com</a>
                     </div>
                 </div>
 
-                <div class="contact-item">
+                <div class="contact-card">
+                    <div class="contact-icon">📱</div>
+                    <div class="contact-info">
+                        <strong>Phone</strong>
+                        <a href="tel:+9779849450627">+977-9849450627</a>
+                    </div>
+                </div>
+
+                <div class="contact-card">
                     <div class="contact-icon">💼</div>
-                    <div>
-                        <strong>LinkedIn</strong><br>
-                        <a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a>
+                    <div class="contact-info">
+                        <strong>LinkedIn</strong>
+                        <a href="https://linkedin.com/in/yourprofile" target="_blank">Connect on LinkedIn</a>
                     </div>
                 </div>
 
-                <div class="contact-item">
+                <div class="contact-card">
                     <div class="contact-icon">🐙</div>
-                    <div>
-                        <strong>GitHub</strong><br>
-                        <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a>
+                    <div class="contact-info">
+                        <strong>GitHub</strong>
+                        <a href="https://github.com/yourusername" target="_blank">View Repositories</a>
                     </div>
                 </div>
 
-                <div class="contact-item">
+                <div class="contact-card">
                     <div class="contact-icon">🎓</div>
-                    <div>
-                        <strong>Research</strong><br>
+                    <div class="contact-info">
+                        <strong>Research Profile</strong>
                         <a href="#" target="_blank">ResearchGate / Google Scholar</a>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-info">
+                        <strong>Location</strong>
+                        <a href="#">Kathmandu, Nepal</a>
                     </div>
                 </div>
             </div>
@@ -665,7 +1528,10 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 Ashok. Built with dedication to understanding Earth's water systems.</p>
+            <p>&copy; 2024 Ashok Bhandari. Advancing sustainable water resource management and climate-resilient infrastructure.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem;">
+                Nepal Engineering Council Registered Engineer (NEC No. 17884) | ADB-JSP Scholar | AIT Outstanding Graduate
+            </p>
         </div>
     </footer>
 
@@ -692,10 +1558,10 @@
             document.getElementById('scrollIndicator').style.width = scrolled + '%';
         });
 
-        // Intersection observer for animation on scroll
+        // Intersection observer for scroll animations
         const observerOptions = {
             threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
+            rootMargin: '0px 0px -50px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -707,12 +1573,46 @@
             });
         }, observerOptions);
 
-        // Observe all cards and project items
-        document.querySelectorAll('.research-card, .project-item').forEach(el => {
+        // Observe cards
+        document.querySelectorAll('.service-card, .project-card, .skill-category, .stat-card, .academic-card').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s, transform 0.6s';
+            el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
             observer.observe(el);
+        });
+
+        // Number counter animation for stats
+        const animateValue = (element, start, end, duration) => {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.innerHTML = value + (element.dataset.suffix || '');
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        };
+
+        // Animate stat numbers when they come into view
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+                    const number = entry.target.querySelector('.stat-number');
+                    const finalValue = parseInt(number.textContent);
+                    if (number.textContent.includes('+')) {
+                        number.dataset.suffix = '+';
+                    }
+                    animateValue(number, 0, finalValue, 2000);
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stat-card').forEach(card => {
+            statObserver.observe(card);
         });
     </script>
 </body>
