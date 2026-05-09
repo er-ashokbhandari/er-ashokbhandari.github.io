@@ -1,316 +1,1731 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashok Bhandari - Civil & Water Resources Engineer | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-deep: #0a0e14;
+            --bg-mid: #16181d;
+            --bg-card: #1e2128;
+            --accent-primary: #60a5fa;
+            --accent-secondary: #818cf8;
+            --accent-tertiary: #a78bfa;
+            --accent-success: #34d399;
+            --accent-warning: #fbbf24;
+            --text-primary: #e5e7eb;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --border-color: #2d3139;
+        }
 
-<title>Ashok Bhandari | Hydrologist • Climate Systems • AI</title>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        /* Animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(96, 165, 250, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(96, 165, 250, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-<style>
-:root{
---bg:#0b0f17;
---card:#1a1f2b;
---accent:#60a5fa;
---accent2:#818cf8;
---text:#e5e7eb;
---muted:#9ca3af;
-}
+        /* Gradient orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: 0;
+            animation: float 25s ease-in-out infinite;
+        }
 
-*{margin:0;padding:0;box-sizing:border-box;}
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: var(--accent-primary);
+            top: -300px;
+            right: -300px;
+        }
 
-body{
-font-family:'Inter',sans-serif;
-background:var(--bg);
-color:var(--text);
-line-height:1.7;
-scroll-behavior:smooth;
-}
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: var(--accent-secondary);
+            bottom: -250px;
+            left: -250px;
+            animation-delay: -8s;
+        }
 
-/* layout */
-.container{max-width:1200px;margin:auto;padding:2rem;}
-section{margin:5rem 0;}
+        .orb-3 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-tertiary);
+            top: 50%;
+            left: 50%;
+            animation-delay: -15s;
+        }
 
-h1{font-size:3rem;}
-h2{font-size:2.2rem;margin-bottom:2rem;color:var(--accent);}
-h3{margin-bottom:0.5rem;}
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(40px, -60px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.9); }
+        }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:1.5rem;
-}
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
 
-.card{
-background:var(--card);
-padding:1.5rem;
-border-radius:12px;
-transition:0.3s;
-border:1px solid #2a2f3a;
-}
+        /* Header Hero */
+        header {
+            padding: 8rem 0 5rem;
+            position: relative;
+        }
 
-.card:hover{
-transform:translateY(-5px);
-border-color:var(--accent);
-}
+        .hero-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
 
-/* hero */
-header{
-text-align:center;
-padding:5rem 0;
-}
+        .profile-section {
+            text-align: center;
+        }
 
-.profile{
-width:160px;height:160px;border-radius:50%;
-object-fit:cover;border:3px solid var(--accent);
-}
+        .profile-photo-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
 
-.subtitle{
-margin-top:1rem;
-color:var(--muted);
-}
+        .profile-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 4px solid var(--accent-primary);
+            box-shadow: 0 0 40px rgba(96, 165, 250, 0.4);
+            object-fit: cover;
+            background: var(--bg-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--accent-primary);
+            position: relative;
+            z-index: 1;
+        }
 
-.btn{
-display:inline-block;
-margin:1rem 0.5rem;
-padding:0.7rem 1.3rem;
-background:linear-gradient(135deg,var(--accent),var(--accent2));
-color:white;
-border-radius:8px;
-text-decoration:none;
-}
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
 
-/* gallery */
-.gallery img{
-width:100%;
-height:250px;
-object-fit:cover;
-border-radius:10px;
-transition:0.3s;
-}
+        .status-indicator {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            width: 24px;
+            height: 24px;
+            background: var(--accent-success);
+            border-radius: 50%;
+            border: 4px solid var(--bg-deep);
+            animation: pulse 2s ease-in-out infinite;
+        }
 
-.gallery img:hover{
-transform:scale(1.05);
-}
+        @keyframes pulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); }
+            50% { opacity: 0.7; box-shadow: 0 0 0 10px rgba(52, 211, 153, 0); }
+        }
 
-/* nav */
-nav{
-position:sticky;
-top:0;
-background:#0b0f17dd;
-backdrop-filter:blur(10px);
-padding:1rem;
-text-align:center;
-}
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
 
-nav a{
-margin:0 1rem;
-color:var(--muted);
-text-decoration:none;
-}
+        .hero-title {
+            font-size: 1.75rem;
+            color: var(--accent-primary);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
 
-nav a:hover{color:var(--accent);}
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+        }
 
-/* footer */
-footer{
-text-align:center;
-margin-top:3rem;
-color:var(--muted);
-}
-</style>
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 8px 24px rgba(96, 165, 250, 0.15);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            box-shadow: 0 4px 16px rgba(96, 165, 250, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(96, 165, 250, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 14, 20, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-primary);
+            transition: width 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-primary);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Scroll Progress */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+            z-index: 1000;
+            transition: width 0.1s;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 6rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            margin-bottom: 3rem;
+            max-width: 800px;
+        }
+
+        /* Project Card */
+        .projects-grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(96, 165, 250, 0.2);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-title h3 {
+            font-size: 1.75rem;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            padding: 0.35rem 0.85rem;
+            background: rgba(96, 165, 250, 0.1);
+            color: var(--accent-primary);
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .project-client {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .project-client strong {
+            color: var(--accent-secondary);
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-details {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .project-details li {
+            color: var(--text-secondary);
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .project-details li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-primary);
+            font-weight: 700;
+        }
+
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 16/10;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            border-color: var(--accent-primary);
+            box-shadow: 0 12px 32px rgba(96, 165, 250, 0.25);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--accent-primary);
+            opacity: 0.3;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(10, 14, 20, 0.9), transparent);
+            padding: 1.5rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-title {
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Education Section */
+        .education-grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .education-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .education-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 0;
+            background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 0 4px 4px 0;
+            transition: height 0.3s;
+        }
+
+        .education-card:hover::before {
+            height: 100%;
+        }
+
+        .education-card:hover {
+            transform: translateX(8px);
+            border-color: var(--accent-primary);
+        }
+
+        .education-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .education-title h3 {
+            font-size: 1.75rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .education-institution {
+            color: var(--accent-primary);
+            font-size: 1.125rem;
+            font-weight: 500;
+        }
+
+        .education-badges {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .education-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .detail-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(96, 165, 250, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .detail-content span {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .detail-content strong {
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .skill-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-4px);
+        }
+
+        .skill-card h3 {
+            font-size: 1.25rem;
+            color: var(--accent-primary);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .skill-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(96, 165, 250, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-item {
+            color: var(--text-secondary);
+            padding: 0.6rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .skill-item::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-primary);
+            font-weight: 700;
+        }
+
+        .skill-item:hover {
+            color: var(--text-primary);
+            padding-left: 2rem;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateX(8px);
+            box-shadow: 0 8px 24px rgba(96, 165, 250, 0.15);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            flex-shrink: 0;
+        }
+
+        .contact-info strong {
+            display: block;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+        }
+
+        .contact-info a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-info a:hover {
+            color: var(--accent-secondary);
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 0 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                gap: 1.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .project-header {
+                flex-direction: column;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
 </head>
-
 <body>
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
 
-<nav>
-<a href="#about">About</a>
-<a href="#research">Research</a>
-<a href="#services">Services</a>
-<a href="#projects">Projects</a>
-<a href="#education">Education</a>
-<a href="#gallery">Gallery</a>
-<a href="#contact">Contact</a>
-</nav>
+    <div class="container">
+        <!-- Hero Header -->
+        <header>
+            <div class="hero-grid">
+                <div class="profile-section">
+                    <div class="profile-photo-wrapper">
+                        <div class="profile-photo">
+                            <!-- Replace with: <img src="images/profile.jpg" alt="Ashok Bhandari"> -->
+                            👤
+                        </div>
+                        <div class="status-indicator"></div>
+                    </div>
+                </div>
+                
+                <div class="hero-content">
+                    <h1>Ashok Bhandari</h1>
+                    <div class="hero-title">Civil & Water Resources Engineer | Hydrologist</div>
+                    <p class="hero-description">
+                        Award-winning engineer with 6+ years of expertise in climate-resilient infrastructure, 
+                        hydrological modeling, and sustainable urban development. Specializing in Noah-MP optimization, 
+                        multi-hazard risk assessment, and large-scale infrastructure planning across Nepal and Southeast Asia.
+                    </p>
+                    
+                    <div class="cta-buttons">
+                        <a href="#contact" class="btn btn-primary">
+                            <span>📧</span> Get in Touch
+                        </a>
+                        <a href="Ashok_CV.pdf" class="btn btn-secondary" download>
+                            <span>📄</span> Download CV
+                        </a>
+                    </div>
 
-<div class="container">
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">6+</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">30+</div>
+                            <div class="stat-label">Major Projects</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">14</div>
+                            <div class="stat-label">Municipalities</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">10+</div>
+                            <div class="stat-label">River Basins</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
 
-<!-- HERO -->
-<header>
-<img src="images/profile.jpg" class="profile">
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-brand">AB</div>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
 
-<h1>Ashok Bhandari</h1>
+    <div class="container">
+        <!-- About Section -->
+        <section id="about">
+            <h2>Professional Summary</h2>
+            <p class="section-subtitle">
+                Civil and Water Resources Engineer with comprehensive experience in urban infrastructure development, 
+                water systems planning, and climate-resilient design. Proven expertise in supporting municipalities and 
+                government agencies in preparing integrated urban development plans, feasibility studies, and investment-ready 
+                infrastructure projects across challenging terrains including high-altitude Himalayan regions.
+            </p>
+        </section>
 
-<p class="subtitle">
-Hydrologist & Civil Engineer working at the intersection of climate systems, 
-hydrological modeling, and data-driven infrastructure planning.
-</p>
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2>Major Projects</h2>
+            <p class="section-subtitle">
+                Comprehensive portfolio spanning urban development, tourism infrastructure, hydrological assessments, 
+                and land surface modeling across Nepal.
+            </p>
 
-<a href="Ashok_Bhandari_CV.pdf" class="btn">Download CV</a>
-<a href="#contact" class="btn">Hire Me</a>
-</header>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-title">
+                            <h3>Noah-MP Optimization for Improved Soil Moisture Estimation</h3>
+                            <div class="project-meta">
+                                <span class="project-badge">Master's Thesis</span>
+                                <span class="project-badge">2023-2025</span>
+                                <span class="project-badge">AIT, Thailand</span>
+                            </div>
+                            <p class="project-client"><strong>Institution:</strong> Asian Institute of Technology</p>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Optimized the Noah-MP land surface model for enhanced soil moisture estimation through updated 
+                        soil texture classifications and parameter calibration specific to Himalayan watersheds.
+                    </p>
+                    <ul class="project-details">
+                        <li>Enhanced soil moisture accuracy by updating soil texture database for Nepal</li>
+                        <li>Integrated ERA5 atmospheric forcing data for model inputs</li>
+                        <li>Validated outputs against ground observations</li>
+                        <li>Applied to agricultural and hydrological forecasting</li>
+                    </ul>
+                </div>
 
-<!-- ABOUT -->
-<section id="about">
-<h2>Professional Summary</h2>
-<p>
-Civil & Water Resources Engineer with 6+ years of experience in hydrological modeling,
-urban infrastructure planning, and climate-resilient systems across Nepal.
-Specialized in Noah-MP, drought monitoring, irrigation optimization,
-and multi-hazard risk assessment.
-</p>
-</section>
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-title">
+                            <h3>Detailed Master Plan - Greater Gauri Shankar Area</h3>
+                            <div class="project-meta">
+                                <span class="project-badge">24 Destinations</span>
+                                <span class="project-badge">NPR 10-30 Crores/Site</span>
+                            </div>
+                            <p class="project-client"><strong>Client:</strong> Department of Tourism, GoN | <strong>Role:</strong> Design Engineer</p>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Led feasibility assessments for 24 Himalayan tourism destinations, resulting in selection and approval 
+                        of 10 priority sites including Sangen Valley, Langtang, Tsho-Rolpa, Rolwaling Valley, and Makalu Barun.
+                    </p>
+                    <ul class="project-details">
+                        <li>Master Plans & DPRs for 10 priority destinations with eco-tourism infrastructure</li>
+                        <li>Multi-hazard risk assessments and climate-resilient design integration</li>
+                        <li>Detail design of trails, roads, drainage, and tourism facilities</li>
+                        <li>Preparation of feasibility analysis and investment planning</li>
+                    </ul>
+                </div>
 
-<!-- RESEARCH -->
-<section id="research">
-<h2>Research & AI Work</h2>
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-title">
+                            <h3>Gauri Shankar Himal Trekking Route - 30 km</h3>
+                            <div class="project-meta">
+                                <span class="project-badge">DPR & Feasibility</span>
+                                <span class="project-badge">High-Altitude</span>
+                            </div>
+                            <p class="project-client"><strong>Client:</strong> Ministry of Tourism, Bagmati Province | <strong>Consultant:</strong> BEAM-SATAEC-UPDCN JV</p>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Comprehensive feasibility study and DPR for new 30 km trekking route including settlement-level 
+                        tourism development in Beding and surrounding villages.
+                    </p>
+                    <ul class="project-details">
+                        <li>Climate-resilient trail design with flash flood and landslide risk assessment</li>
+                        <li>Hazard zonation and safe route alignment planning</li>
+                        <li>Detail design of trails, suspension bridges, and wooden crossings</li>
+                        <li>Elaborative GIS mapping of study area with environmental conditions</li>
+                    </ul>
+                </div>
 
-<div class="grid">
+                <!-- Project 4 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-title">
+                            <h3>Integrated Urban Development Plan - 14 Municipalities</h3>
+                            <div class="project-meta">
+                                <span class="project-badge">DUDBC</span>
+                                <span class="project-badge">NPR 300M+ per project</span>
+                            </div>
+                            <p class="project-client"><strong>Client:</strong> DUDBC | <strong>Consultant:</strong> ERMC-NEST-GEOCOM JV</p>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Led integrated urban water and infrastructure planning for 14 municipalities including 15-year 
+                        development visions, sector strategies, and Detailed Engineering Designs.
+                    </p>
+                    <ul class="project-details">
+                        <li>Urban stormwater drainage systems (18-34 km per municipality)</li>
+                        <li>Strategic road networks with bus parks (5-34 km per project)</li>
+                        <li>River training and flood management structures</li>
+                        <li>Sewerage and water supply systems integration</li>
+                        <li>Coverage: Mahalaxmi, Suryabinayak, Shankharapur, KageshworiManohara, Gokarneshwor, Tokha, Tarkeshwor, Nagarjung, Chandragiri, Dakshinkali, Belkotgadi, Dhunebesi, Rapti</li>
+                    </ul>
+                </div>
 
-<div class="card">
-<h3>Noah-MP Optimization</h3>
-<p>Enhanced soil moisture estimation using calibrated land surface modeling.</p>
-</div>
+                <!-- Project 5 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-title">
+                            <h3>Tourism Development - 11 Destinations, Gandaki Province</h3>
+                            <div class="project-meta">
+                                <span class="project-badge">Master Plan & DPR</span>
+                                <span class="project-badge">NPR 3 Crores/Site</span>
+                            </div>
+                            <p class="project-client"><strong>Client:</strong> Ministry of Tourism, Gandaki Province | <strong>Consultant:</strong> BEAM-SATAEC-PICASSO JV</p>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Preparation of conceptual master plans and DPRs for 11 major tourism destinations including 
+                        Mardi Himal, Khopra Danda, and Dhaulagiri Icefall.
+                    </p>
+                    <ul class="project-details">
+                        <li>Eco-tourism infrastructure design and visitor service planning</li>
+                        <li>Detail design of trails across Mustang, Kaski, Manang, and Syangja</li>
+                        <li>Bus parks and village roads development</li>
+                        <li>Social, economic, and environmental analysis for tourism management</li>
+                    </ul>
+                </div>
 
-<div class="card">
-<h3>Satellite & Earth Observation</h3>
-<p>ERA5, CMIP6 and GEE workflows for environmental monitoring.</p>
-</div>
+                <!-- Project 6 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-title">
+                            <h3>New Town Development - Bhaktapur & Lalitpur Districts</h3>
+                            <div class="project-meta">
+                                <span class="project-badge">20,000 Ropani</span>
+                                <span class="project-badge">Land Pooling</span>
+                            </div>
+                            <p class="project-client"><strong>Client:</strong> KVDA | <strong>Consultant:</strong> ERMC-NEST-ADA JV</p>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Design and development with "One City One Identity" concept - 10,000 ropani each in Lalitpur 
+                        and Bhaktapur districts.
+                    </p>
+                    <ul class="project-details">
+                        <li>Detailed engineering designs for roads (11m, 8m), drainage, sewerage, water supply</li>
+                        <li>Phase-wise detail investment plan with PPP-based cost sharing mechanisms</li>
+                        <li>Integration of transport and land use planning</li>
+                        <li>Geological, environmental, physical, and socio-economic analysis</li>
+                    </ul>
+                </div>
 
-<div class="card">
-<h3>Climate Risk Systems</h3>
-<p>Drought, flood and hazard modeling frameworks.</p>
-</div>
+                <!-- Project 7 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-title">
+                            <h3>Eastern Kathmandu New Township Project</h3>
+                            <div class="project-meta">
+                                <span class="project-badge">23,000 Ropani</span>
+                                <span class="project-badge">Physical Development Plan</span>
+                            </div>
+                            <p class="project-client"><strong>Client:</strong> EKNTP, KVDA | <strong>Consultant:</strong> ESDN Pvt. Ltd.</p>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Preparation of comprehensive physical development plan with long-term vision for entire area 
+                        including existing and future land use.
+                    </p>
+                    <ul class="project-details">
+                        <li>Land use plan integrating Transportation Network Plan</li>
+                        <li>Urban expansion area identification (high, medium, low density zones)</li>
+                        <li>Indicative development plan with phased infrastructure strategy</li>
+                    </ul>
+                </div>
 
-</div>
+                <!-- Project 8 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-title">
+                            <h3>New Town Development - Suryabinayak & Changunarayan</h3>
+                            <div class="project-meta">
+                                <span class="project-badge">Feasibility & DPR</span>
+                                <span class="project-badge">Land Pooling</span>
+                            </div>
+                            <p class="project-client"><strong>Client:</strong> KVDA | <strong>Consultant:</strong> GEOCOM-NEST-PICASSO</p>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Detailed Project Report based on land pooling concept for sustainable new town development.
+                    </p>
+                    <ul class="project-details">
+                        <li>Feasibility study and project area definition</li>
+                        <li>Transport and land use plan integration</li>
+                        <li>5-year phased investment plan with PPP-based cost sharing</li>
+                        <li>Detailed economic and financial analysis with cost recovery plan</li>
+                    </ul>
+                </div>
 
-<!-- INTERACTIVE CHART -->
-<canvas id="myChart" style="margin-top:2rem;"></canvas>
+                <!-- Project 9 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-title">
+                            <h3>Mega City Development - Bhairahawa-Butwal & Pokhara-Damauli</h3>
+                            <div class="project-meta">
+                                <span class="project-badge">20-Year Vision</span>
+                                <span class="project-badge">Strategic Planning</span>
+                            </div>
+                            <p class="project-client"><strong>Client:</strong> DUDBC | <strong>Consultant:</strong> NEST/PICASSO/URBAN PLANNING</p>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Strategic project identification and feasibility study for integrated mega city development corridors.
+                    </p>
+                    <ul class="project-details">
+                        <li>Megacity framework development with comprehensive SWOT analysis</li>
+                        <li>Strategic urban development plan for integrated city regions</li>
+                        <li>Detailed engineering design for 3 major infrastructure projects (landfill, markets, roads)</li>
+                        <li>Institutional and legal framework for plan implementation</li>
+                    </ul>
+                </div>
 
-</section>
+                <!-- Project 10 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-title">
+                            <h3>Integrated Urban Development - Vyas & Suklagandaki</h3>
+                            <div class="project-meta">
+                                <span class="project-badge">MSIP</span>
+                                <span class="project-badge">30 km Road Network</span>
+                            </div>
+                            <p class="project-client"><strong>Client:</strong> Vyas & Suklagandaki Municipalities | <strong>Consultant:</strong> NEST/PICASSO/UPDCN JV</p>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Long-term physical development planning with multi-sectoral investment framework.
+                    </p>
+                    <ul class="project-details">
+                        <li>Detail Engineering Design of 30 km prioritized road network</li>
+                        <li>Multi-sectoral investment plan (MSIP) preparation</li>
+                        <li>Municipal profile and planning bylaws development</li>
+                        <li>Land use and road network plan integration</li>
+                    </ul>
+                </div>
 
-<!-- SERVICES -->
-<section id="services">
-<h2>Consultancy Services</h2>
+                <!-- Project 11 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-title">
+                            <h3>Watershed & River Basin Assessments</h3>
+                            <div class="project-meta">
+                                <span class="project-badge">10+ Basins</span>
+                                <span class="project-badge">Research</span>
+                            </div>
+                            <p class="project-client"><strong>Client:</strong> Various | <strong>Consultant:</strong> Sunakhari Research Consult</p>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Comprehensive hydrological assessments across major river basins including Birendranagar, 
+                        Gandaki Province, and Upper Karnali.
+                    </p>
+                    <ul class="project-details">
+                        <li>Runoff modeling and flood potential analysis</li>
+                        <li>Groundwater recharge assessment</li>
+                        <li>Early warning concept development through hydrological analysis</li>
+                        <li>Collaboration with FAO for Churia region restoration plans</li>
+                    </ul>
+                </div>
 
-<div class="grid">
+                <!-- Project 12 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-title">
+                            <h3>Land Consolidation - Lomangthang, Galkot, Dhorpatan & Bandipur</h3>
+                            <div class="project-meta">
+                                <span class="project-badge">600 Ropani</span>
+                                <span class="project-badge">Agricultural Development</span>
+                            </div>
+                            <p class="project-client"><strong>Client:</strong> MoFES, Gandaki | <strong>Consultant:</strong> Sunakhari Research Consult</p>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Detail Master Plan with DPR for agricultural land development with infrastructure for potato 
+                        and rice farming.
+                    </p>
+                    <ul class="project-details">
+                        <li>Overall project coordination and supervision</li>
+                        <li>Detail design and estimate of road and drainage systems</li>
+                        <li>Construction supervision and quality assurance</li>
+                    </ul>
+                </div>
 
-<div class="card">
-<h3>Hydrological Modeling</h3>
-<p>Noah-MP, SWAT, HEC-HMS, soil moisture analysis.</p>
-</div>
+                <!-- Project 13 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-title">
+                            <h3>Baireni-Galchhi Land Pooling Project</h3>
+                            <div class="project-meta">
+                                <span class="project-badge">1,000 Ropani</span>
+                                <span class="project-badge">Stage II</span>
+                            </div>
+                            <p class="project-client"><strong>Client:</strong> DUDBC, Dhading | <strong>Consultant:</strong> SILT-NEST-REC JV</p>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Implementation of land pooling project with comprehensive infrastructure development.
+                    </p>
+                    <ul class="project-details">
+                        <li>Master Plan and detailed engineering survey</li>
+                        <li>Design of road, drainage, water supply, and sewerage systems</li>
+                        <li>Team coordination and construction supervision</li>
+                    </ul>
+                </div>
 
-<div class="card">
-<h3>Drought Monitoring</h3>
-<p>SPEI, SPI, SMAI and early warning systems.</p>
-</div>
+                <!-- Project 14 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-title">
+                            <h3>Integrated Development Plan - Gauriganj & Rangeli New Towns</h3>
+                            <div class="project-meta">
+                                <span class="project-badge">Postal Highway</span>
+                                <span class="project-badge">Terai Development</span>
+                            </div>
+                            <p class="project-client"><strong>Client:</strong> DUDBC | <strong>Consultant:</strong> ERMC-NEST-A-NOT JV</p>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Development of balanced urban system along postal highway in Terai region.
+                    </p>
+                    <ul class="project-details">
+                        <li>Existing transportation network assessment</li>
+                        <li>Transportation plan for efficient mobility</li>
+                        <li>Priority project design and mapping</li>
+                    </ul>
+                </div>
 
-<div class="card">
-<h3>Irrigation Planning</h3>
-<p>Soil moisture-based irrigation optimization.</p>
-</div>
+                <!-- Project 15 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-title">
+                            <h3>Drainage Master Plan - Bhokraha-Narisingh Rural Municipality</h3>
+                            <div class="project-meta">
+                                <span class="project-badge">Master Planning</span>
+                                <span class="project-badge">Rural Infrastructure</span>
+                            </div>
+                            <p class="project-client"><strong>Client:</strong> Bhokraha-Narisingh RM | <strong>Consultant:</strong> Punhill Construction Consulting</p>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Comprehensive drainage master plan with detailed engineering and cost estimates.
+                    </p>
+                    <ul class="project-details">
+                        <li>Master plan preparation and detailed engineering survey</li>
+                        <li>Detailed design and cost estimation</li>
+                        <li>Training to municipal engineers on drainage design</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-<div class="card">
-<h3>Urban Infrastructure</h3>
-<p>Drainage, sewerage, flood resilience.</p>
-</div>
+        <!-- Education Section -->
+        <section id="education">
+            <h2>Education & Achievements</h2>
+            <p class="section-subtitle">
+                Academic excellence with international scholarships and top honors.
+            </p>
 
-</div>
-</section>
+            <div class="education-grid">
+                <div class="education-card">
+                    <div class="education-header">
+                        <div class="education-title">
+                            <h3>Master of Science in Water Engineering and Management</h3>
+                            <div class="education-institution">Asian Institute of Technology (AIT), Thailand</div>
+                        </div>
+                        <div class="education-badges">
+                            <span class="badge">🏆 Outstanding Graduate</span>
+                            <span class="badge">💰 ADB-JSP Scholar</span>
+                        </div>
+                    </div>
+                    
+                    <div class="education-details">
+                        <div class="detail-item">
+                            <div class="detail-icon">📅</div>
+                            <div class="detail-content">
+                                <span>Duration</span>
+                                <strong>Aug 2023 - May 2025</strong>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">📊</div>
+                            <div class="detail-content">
+                                <span>CGPA</span>
+                                <strong>3.78 / 4.0</strong>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">📝</div>
+                            <div class="detail-content">
+                                <span>Thesis</span>
+                                <strong>Noah-MP Optimization</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<!-- PROJECTS -->
-<section id="projects">
-<h2>Projects</h2>
+                <div class="education-card">
+                    <div class="education-header">
+                        <div class="education-title">
+                            <h3>Bachelor of Technology in Civil Engineering</h3>
+                            <div class="education-institution">University of Kerala, India</div>
+                        </div>
+                        <div class="education-badges">
+                            <span class="badge">🥇 Gold Medal</span>
+                            <span class="badge">🎓 Indian Embassy Scholar</span>
+                        </div>
+                    </div>
+                    
+                    <div class="education-details">
+                        <div class="detail-item">
+                            <div class="detail-icon">📅</div>
+                            <div class="detail-content">
+                                <span>Duration</span>
+                                <strong>Aug 2013 - Jun 2017</strong>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">📊</div>
+                            <div class="detail-content">
+                                <span>Percentage</span>
+                                <strong>90.2%</strong>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">🏅</div>
+                            <div class="detail-content">
+                                <span>Recognition</span>
+                                <strong>University Topper</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<div class="grid">
+                <div class="education-card">
+                    <div class="education-title">
+                        <h3>🎖️ Professional Certifications</h3>
+                    </div>
+                    <ul class="project-details">
+                        <li>Registered Engineer - Nepal Engineering Council (NEC) - No. 17884 "Civil" "A"</li>
+                        <li>Life Member - Nepal Engineers Association (NEA) - No. 29423</li>
+                    </ul>
+                </div>
 
-<div class="card">
-<h3>Noah-MP Soil Moisture Optimization</h3>
-<p>Master’s thesis improving soil moisture estimation.</p>
-</div>
+                <div class="education-card">
+                    <div class="education-title">
+                        <h3>🌱 Training & Workshops</h3>
+                    </div>
+                    <ul class="project-details">
+                        <li>Nature-based Solutions for Disaster & Climate Resilience (SDGAcademyX, 2025)</li>
+                        <li>Earthquake Disaster Study - Thailand-Myanmar (AIT-SU, 2025)</li>
+                        <li>NASA-ADPC International Workshop on Satellite Soil Moisture (AIT, 2024)</li>
+                        <li>Lancang-Mekong River Water Sciences Training (Hohai University, 2024)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-<div class="card">
-<h3>Tourism Development</h3>
-<p>24 sites assessed, 10 selected (NPR 10–30 Crores).</p>
-</div>
+        <!-- Skills Section -->
+        <section id="skills">
+            <h2>Technical Expertise</h2>
+            <p class="section-subtitle">
+                Comprehensive skill set spanning hydrological modeling, infrastructure design, and climate analysis.
+            </p>
 
-<div class="card">
-<h3>Urban Planning</h3>
-<p>14 municipalities infrastructure development planning.</p>
-</div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>
+                        <span class="skill-icon">🌊</span>
+                        Hydrological Modeling
+                    </h3>
+                    <ul class="skill-list">
+                        <li class="skill-item">Noah-MP Land Surface Model</li>
+                        <li class="skill-item">HEC-HMS & HEC-RAS</li>
+                        <li class="skill-item">MIKE+ Urban & River Modeling</li>
+                        <li class="skill-item">SWAT Watershed Model</li>
+                        <li class="skill-item">Soil Moisture Estimation</li>
+                        <li class="skill-item">Flood & Drought Analysis</li>
+                    </ul>
+                </div>
 
-</div>
+                <div class="skill-card">
+                    <h3>
+                        <span class="skill-icon">🗺️</span>
+                        Geospatial Analysis
+                    </h3>
+                    <ul class="skill-list">
+                        <li class="skill-item">QGIS & ArcGIS</li>
+                        <li class="skill-item">Google Earth Engine</li>
+                        <li class="skill-item">Remote Sensing & Satellite Data</li>
+                        <li class="skill-item">Civil 3D & AutoCAD</li>
+                        <li class="skill-item">Spatial Data Analysis</li>
+                        <li class="skill-item">DEM & Terrain Analysis</li>
+                    </ul>
+                </div>
 
-</section>
+                <div class="skill-card">
+                    <h3>
+                        <span class="skill-icon">📊</span>
+                        Data Science
+                    </h3>
+                    <ul class="skill-list">
+                        <li class="skill-item">Python (NumPy, Pandas, xarray)</li>
+                        <li class="skill-item">Data Analysis & Visualization</li>
+                        <li class="skill-item">Statistical Modeling</li>
+                        <li class="skill-item">Time Series Analysis</li>
+                        <li class="skill-item">Climate Data Processing</li>
+                        <li class="skill-item">ERA5 & CMIP6 Data</li>
+                    </ul>
+                </div>
 
-<!-- EDUCATION -->
-<section id="education">
-<h2>Education</h2>
+                <div class="skill-card">
+                    <h3>
+                        <span class="skill-icon">🏗️</span>
+                        Infrastructure Design
+                    </h3>
+                    <ul class="skill-list">
+                        <li class="skill-item">Urban Drainage Systems</li>
+                        <li class="skill-item">Water Supply & Sewerage</li>
+                        <li class="skill-item">Structural Design (SAP, ETABS)</li>
+                        <li class="skill-item">River Training Works</li>
+                        <li class="skill-item">DPR & Feasibility Studies</li>
+                        <li class="skill-item">Cost Estimation & BOQs</li>
+                    </ul>
+                </div>
 
-<div class="card">
-<h3>MSc Water Engineering & Management</h3>
-<p>Asian Institute of Technology (AIT) | CGPA 3.78</p>
-</div>
+                <div class="skill-card">
+                    <h3>
+                        <span class="skill-icon">🌍</span>
+                        Climate & Environment
+                    </h3>
+                    <ul class="skill-list">
+                        <li class="skill-item">Climate Change Impact Assessment</li>
+                        <li class="skill-item">Environmental Impact Assessment</li>
+                        <li class="skill-item">Multi-Hazard Risk Assessment</li>
+                        <li class="skill-item">Disaster Risk Reduction</li>
+                        <li class="skill-item">Climate-Resilient Design</li>
+                        <li class="skill-item">Environmental Safeguards</li>
+                    </ul>
+                </div>
 
-<div class="card">
-<h3>B.Tech Civil Engineering</h3>
-<p>University of Kerala | Gold Medalist</p>
-</div>
+                <div class="skill-card">
+                    <h3>
+                        <span class="skill-icon">💼</span>
+                        Project Management
+                    </h3>
+                    <ul class="skill-list">
+                        <li class="skill-item">Feasibility Studies & DPRs</li>
+                        <li class="skill-item">Stakeholder Engagement</li>
+                        <li class="skill-item">Multi-Sectoral Coordination</li>
+                        <li class="skill-item">Technical Documentation</li>
+                        <li class="skill-item">Procurement & Bid Documents</li>
+                        <li class="skill-item">Construction Supervision</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-</section>
+        <!-- Gallery Section -->
+        <section id="gallery">
+            <h2>Project Gallery</h2>
+            <p class="section-subtitle">
+                Visual documentation of field work, infrastructure projects, and research activities.
+            </p>
 
-<!-- GALLERY -->
-<section id="gallery">
-<h2>Gallery</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <!-- <img src="images/gallery1.jpg" alt="Field Work"> -->
+                    <div class="gallery-placeholder">🏔️</div>
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">High-Altitude Survey</div>
+                    </div>
+                </div>
 
-<div class="grid gallery">
-<img src="images/gallery1.jpg">
-<img src="images/gallery2.jpg">
-<img src="images/gallery3.jpg">
-<img src="images/gallery4.jpg">
-</div>
+                <div class="gallery-item">
+                    <!-- <img src="images/gallery2.jpg" alt="Infrastructure"> -->
+                    <div class="gallery-placeholder">🌉</div>
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Bridge Construction</div>
+                    </div>
+                </div>
 
-</section>
+                <div class="gallery-item">
+                    <!-- <img src="images/gallery3.jpg" alt="Urban Planning"> -->
+                    <div class="gallery-placeholder">🏙️</div>
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Urban Development</div>
+                    </div>
+                </div>
 
-<!-- CONTACT -->
-<section id="contact">
-<h2>Contact</h2>
+                <div class="gallery-item">
+                    <!-- <img src="images/gallery4.jpg" alt="Research"> -->
+                    <div class="gallery-placeholder">💻</div>
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Modeling & Analysis</div>
+                    </div>
+                </div>
 
-<p>Email: er.ashokbhandari@gmail.com</p>
-<p>Phone: +977-9849450627</p>
+                <div class="gallery-item">
+                    <!-- <img src="images/gallery5.jpg" alt="Tourism"> -->
+                    <div class="gallery-placeholder">⛰️</div>
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Tourism Infrastructure</div>
+                    </div>
+                </div>
 
-<p>
-LinkedIn:
-<a href="https://www.linkedin.com/in/ashok-bhandari-866aa0124/" target="_blank">
-View Profile
-</a>
-</p>
+                <div class="gallery-item">
+                    <!-- <img src="images/gallery6.jpg" alt="Community"> -->
+                    <div class="gallery-placeholder">👥</div>
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Community Engagement</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-</section>
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2>Get in Touch</h2>
+            <p class="section-subtitle">
+                Available for consultancy projects, collaborations, and professional opportunities.
+            </p>
 
-<footer>
-<p>© 2026 Ashok Bhandari</p>
-</footer>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-info">
+                        <strong>Email</strong>
+                        <a href="mailto:er.ashokbhandari@gmail.com">er.ashokbhandari@gmail.com</a>
+                    </div>
+                </div>
 
-</div>
+                <div class="contact-card">
+                    <div class="contact-icon">📱</div>
+                    <div class="contact-info">
+                        <strong>Phone</strong>
+                        <a href="tel:+9779849450627">+977-9849450627</a>
+                    </div>
+                </div>
 
-<!-- JS -->
-<script>
-const ctx = document.getElementById('myChart');
+                <div class="contact-card">
+                    <div class="contact-icon">💼</div>
+                    <div class="contact-info">
+                        <strong>LinkedIn</strong>
+                        <a href="https://www.linkedin.com/in/ashok-bhandari-866aa0124/" target="_blank">Connect with me</a>
+                    </div>
+                </div>
 
-new Chart(ctx, {
-type: 'line',
-data: {
-labels: ['Jan','Feb','Mar','Apr','May','Jun'],
-datasets: [{
-label: 'Soil Moisture Trend (Sample)',
-data: [20,25,30,28,35,40]
-}]
-}
-});
-</script>
+                <div class="contact-card">
+                    <div class="contact-icon">🐙</div>
+                    <div class="contact-info">
+                        <strong>GitHub</strong>
+                        <a href="https://github.com/yourusername" target="_blank">View Repositories</a>
+                    </div>
+                </div>
 
+                <div class="contact-card">
+                    <div class="contact-icon">🎓</div>
+                    <div class="contact-info">
+                        <strong>Research</strong>
+                        <a href="#" target="_blank">Google Scholar</a>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-info">
+                        <strong>Location</strong>
+                        <a href="#">Kathmandu, Nepal</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Ashok Bhandari. All rights reserved.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.85rem;">
+                NEC Registered Engineer (No. 17884) | ADB-JSP Scholar | AIT Outstanding Graduate
+            </p>
+            <p style="margin-top: 1rem; font-size: 0.8rem;">
+                Built with dedication to sustainable infrastructure and climate resilience
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll progress indicator
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollIndicator').style.width = scrolled + '%';
+        });
+
+        // Intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe cards
+        document.querySelectorAll('.project-card, .skill-card, .stat-item, .education-card, .gallery-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(el);
+        });
+
+        // Animate stat numbers
+        const animateValue = (element, start, end, duration) => {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.innerHTML = value + (element.dataset.suffix || '');
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        };
+
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+                    const number = entry.target.querySelector('.stat-number');
+                    const finalValue = parseInt(number.textContent);
+                    if (number.textContent.includes('+')) {
+                        number.dataset.suffix = '+';
+                    }
+                    animateValue(number, 0, finalValue, 2000);
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stat-item').forEach(card => {
+            statObserver.observe(card);
+        });
+    </script>
 </body>
 </html>
